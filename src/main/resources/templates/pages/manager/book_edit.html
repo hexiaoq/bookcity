@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>编辑图书</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" >
+<style type="text/css">
+	h1 {
+		text-align: center;
+		margin-top: 200px;
+	}
+	
+	h1 a {
+		color:red;
+	}
+	
+	input {
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+		<div id="header">
+			<img class="logo_img" alt="" th:href="@{/img/logo.gif}" >
+			<span class="wel_word">编辑图书</span>
+			<div>
+				<a href="book_manager.html">图书管理</a>
+				<a href="order_manager.html">订单管理</a>
+				<a href="../client/index1.html">返回商城</a>
+			</div>
+		</div>
+		
+		<div id="main">
+			<form th:action="@{/update}">
+				<input  type="hidden" name="pageNo" th:value="${pageNo}">
+				<input type="hidden" name="id" th:value="${book.getId()}">
+				<table>
+					<tr>
+						<td>名称</td>
+						<td>价格</td>
+						<td>作者</td>
+						<td>销量</td>
+						<td>库存</td>
+						<td colspan="2">操作</td>
+					</tr>		
+					<tr>
+						<td><input name="name" type="text"  th:value="${book.getName()}"/></td>
+						<td><input name="price" type="text"  th:value="${book.getPrice()}"/></td>
+						<td><input name="author" type="text"  th:value="${book.getAuthor()}"  /></td>
+						<td><input name="sales" type="text"  th:value="${book.getSales()}"/></td>
+						<td><input name="stock" type="text"  th:value="${book.getStock()}"/></td>
+						<td><input type="submit" value="提交"/></td>
+
+					</tr>	
+				</table>
+			</form>
+			
+	
+		</div>
+
+		<div th:replace="pages/common/bar::footbar" ></div>
+</body>
+</html>

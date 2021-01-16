@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>HXQ书城会员登录页面</title>
+
+
+	<div th:replace="pages/common/bar::cssbar"></div>
+	<script type="text/javascript" th:src="@{/script/jquery-1.7.2.js}"></script>
+	<script type="text/javascript">
+		$(function () {
+			//给验证绑定单击事件,点击时,重新请求服务器,得到新的图片
+			$("#code_img").click(function () {
+				this.src="/kaptcha.jpg?d="+new Date();
+			});
+			$("#sub_btn").click(function () {
+				var codeText = $("#code").val();
+
+				//去掉验证码前后空格
+				// alert("去空格前：["+codeText+"]")
+				codeText = $.trim(codeText);
+				// alert("去空格后：["+codeText+"]")
+
+				if (codeText == null || codeText == "") {
+					//4 提示用户
+					$("span.errorMsg").text("验证码不能为空!!!");
+
+					return false;
+				}
+
+				// 去掉错误信息
+				$("span.errorMsg").text("");
+
+			})
+				}
+
+		)
+
+	</script>
+</head>
+<body>
+		<div id="login_header" >
+			<img class="logo_img" alt="" src="/static/css/logo.gif" th:src="@{/img/logo.gif}">
+		</div>
+		
+			<div class="login_banner">
+			
+				<div id="l_content">
+					<span class="login_word">欢迎登录</span>
+				</div>
+				
+				<div id="content">
+					<div class="login_form">
+						<div class="login_box">
+							<div class="tit">
+								<h1>HXQ书城会员</h1>
+								<a href="regist.html" th:href="@{/register.html}">立即注册</a>
+							</div>
+							<div class="msg_cont">
+								<b></b>
+								<span class="errorMsg"  th:if="${not #strings.isEmpty(wrong)}" th:text="${wrong}">请输入用户名和密码</span>
+							</div>
+							<div class="form">
+								<form th:action="@{/login}" method="post">
+									<label>用户名称：</label>
+									<input class="itxt" type="text" placeholder="请输入用户名"
+										   autocomplete="off" tabindex="1" name="name" />
+									<br />
+									<br />
+									<label>用户密码：</label>
+									<input class="itxt" type="password" placeholder="请输入密码"
+										   autocomplete="off" tabindex="1" name="password" />
+									<br />
+									<br />
+									<label>验证码：</label>
+									<input class="itxt" type="text" name="code" style="width: 130px;" id="code"/>
+									<img alt="" th:src="@{/kaptcha.jpg}" id="code_img" style="float: right; margin-right: 40px; height:26px;width: 100px">
+									<br />
+									<br />
+									<input type="submit" value="登录" id="sub_btn" />
+								</form>
+							</div>
+
+							
+						</div>
+					</div>
+				</div>
+			</div>
+	<div th:replace="pages/common/bar::footbar"></div>
+</body>
+</html>

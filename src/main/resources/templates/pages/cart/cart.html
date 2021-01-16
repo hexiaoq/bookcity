@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>购物车</title>
+
+	<div th:replace="pages/common/bar::cssbar"></div>
+</head>
+<body>
+	
+	<div th:replace="pages/common/bar::topbar"></div>
+	
+	<div id="main"  >
+<!--		th:if="${not #strings.isEmpty(#httpSession.getAttribute('cart'))}"-->
+		<table >
+			<tr>
+				<td>商品名称</td>
+				<td>数量</td>
+				<td>单价</td>
+				<td>金额</td>
+				<td>操作</td>
+			</tr>		
+			<tr th:if="${not #maps.isEmpty(session.cart.items)}"  th:each="book:${session.cart.items}">
+				<td th:text="${book.value.name}">时间简史</td>
+				<td th:text="${book.value.count}">2</td>
+				<td th:text="${book.value.pirce}">30.00</td>
+				<td th:text="${book.value.totalprice}">60.00</td>
+				<td><a href="#" th:href="@{/deleteitem(id=${book.value.id})}">删除</a></td>
+			</tr>	
+			
+
+		</table>
+		
+		<div class="cart_info">
+			<span class="cart_span">购物车中共有<span class="b_count" th:text="${session.cart.getTotalcount()}">4</span>件商品</span>
+			<span class="cart_span">总金额<span class="b_price" th:text="${session.cart.getTotalprice()}">90.00</span>元</span>
+			<span class="cart_span"><a href="#" th:href="@{/clear}">清空购物车</a></span>
+			<span class="cart_span"><a id="check">去结账</a></span>
+			<script type="text/javascript" th:src="@{/script/jquery-1.7.2.js}"></script>
+			<script type="text/javascript">
+				$(function () {
+					$("#check").click(function () {
+						alert("该功能还在研发中,敬请期待");
+					})
+				})
+			</script>
+
+		</div>
+	
+	</div>
+
+	<div th:replace="pages/common/bar::footbar" ></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>图书管理</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" >
+	<script type="text/javascript" th:src="@{/script/jquery-1.7.2.js}"></script>
+</head>
+<body>
+	
+	<div th:replace="pages/common/bar::topbar"></div>
+	
+	<div id="main">
+		<table>
+			<tr th:each="book:${page.items}" >
+				<td th:text="${book.getName()}">名称</td>
+				<td th:text="${book.getPrice()}">名称</td>
+				<td th:text="${book.getAuthor()}">名称</td>
+				<td th:text="${book.getSales()}">名称</td>
+				<td th:text="${book.getStock()}">名称</td>
+				<td><a href="book_edit.html" th:href="@{/toupdatebook(id=${book.getId()},pageNo=${param.pageNo})}">修改</a></td>
+				<td><a href="#" th:href="@{/delete(id=${book.getId()},pageNo=${param.pageNo})}">删除</a></td>
+			</tr>		
+
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><a href="book_edit.html" th:href="@{/toaddbook}">添加图书</a></td>
+			</tr>	
+		</table>
+	</div>
+	<div th:replace="pages/common/pagenav::pagenav"></div>
+	
+	<div id="bottom">
+		<span>
+			hxq书城.Copyright &copy;2020
+		</span>
+	</div>
+</body>
+</html>

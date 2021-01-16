@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div id="page_nav"  th:fragment="pagenav">
+
+        <a th:href="@{/}+${page.url}">首页</a>
+        <a th:href="@{'/'+${page.url}(pageNo=${page.pageNo-1})}">上一页</a>
+        <a th:href="@{'/'+${page.url}(pageNo=${page.pageNo-1})}" th:text="${page.pageNo-1}"></a>
+
+
+
+    <a th:href="@{'/'+${page.url}(pageNo=${page.pageNo+1})}" th:text="${page.pageNo+1}"></a>
+    <a th:href="@{'/'+${page.url}(pageNo=${page.pageNo+1})}">下一页</a>
+    <a th:href="@{'/'+${page.url}(pageNo=${page.pagetotal})}">末页</a>
+    共[[${page.pagetotal}]]页，[[${page.pagetalcount}]]条记录 到第<input th:value="${page.pageNo}" name="pn" id="pn_input"/>页
+    <input type="button" id="searchPageBtn" value="确定">
+    <script type="text/javascript">
+        $(function () { // 跳 到 指 定 的 页 码
+            $("#searchPageBtn").click(function () {
+                var pageNo = $("#pn_input").val();
+
+                // javaScript 语 言 中 提 供 了 一 个 location 地 址 栏 对 象
+                // 它 有 一 个 属 性 叫 href. 它 可 以 获 取 浏 览 器 地 址 栏 中 的 地 址
+                // href 属 性 可 读 ， 可 写
+
+                location.href = "http://47.98.210.55:8080/[[${page.url}]]?pageNo="+pageNo;
+
+            }); });
+    </script>
+
+</div>
+</html>

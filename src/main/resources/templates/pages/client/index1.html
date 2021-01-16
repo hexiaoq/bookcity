@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>书城首页</title>
+
+<div th:replace="pages/common/bar::cssbar"></div>
+
+	<script type="text/javascript" th:src="@{/script/jquery-1.7.2.js}"></script>
+	<script type="text/javascript">
+		$(function () {
+			$(".addtocart").click(function () {
+				var attr = $(this).attr("bookid");
+				alert("确认添加?");
+
+				location.href="http://47.98.210.55:8080/additem?id="+attr;
+
+
+			})
+		})
+	</script>
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" th:src="@{/img/logo.gif}" >
+			<span class="wel_word">网上书城</span>
+			<div>
+				<a  th:if="${#strings.isEmpty(session.loginuser)}" th:href="@{/login.html}">登录</a>
+				<a th:if="${not #strings.isEmpty(session.loginuser)}" th:text="尊敬的用户+${session.loginuser}"></a>
+				<a th:href="@{/register.html}">注册</a>
+				<a th:href="@{/logout}">注销</a>
+				<a  th:if="${not #strings.isEmpty(session.loginuser)}" th:href="@{/tocart}">我的购物车</a>
+				<a  th:if="${not #strings.isEmpty(session.loginuser)}" th:href="@{/manager.html}">后台管理</a>
+			</div>
+	</div>
+
+	<div id="main">
+		<div id="book">
+			<div class="book_cond">
+				<form th:action="@{/pagebyprice}" method="get">
+					价格：<input id="min" type="text" name="min" value=""> 元 - 
+						<input id="max" type="text" name="max" value=""> 元 
+						<input type="submit" value="查询" />
+				</form>
+			</div>
+			<div style="text-align: center">
+				<span th:if="${not #strings.isEmpty(session.cart)}">您的购物车中有[[${session.cart.getTotalcount()}]]件商品</span>
+				<div th:if="${not #strings.isEmpty(session.lastname)}">
+					您刚刚将<span style="color: red">[[${session.lastname}]]</span>加入到了购物车中
+				</div>
+			</div>
+
+			
+			<div class="b_list" th:each="book:${page.items}">
+				<div class="img_div">
+					<img class="book_img" alt="" th:src="@{/img/default.jpg}" />
+				</div>
+				<div class="book_info">
+					<div class="book_name">
+						<span class="sp1">书名:</span>
+						<span class="sp2" th:text="${book.getName()}">时间简史</span>
+					</div>
+					<div class="book_author">
+						<span class="sp1">作者:</span>
+						<span class="sp2" th:text="${book.getAuthor()}">霍金</span>
+					</div>
+					<div class="book_price">
+						<span class="sp1">价格:</span>
+						<span class="sp2" th:text="${book.getPrice()}">￥30.00</span>
+					</div>
+					<div class="book_sales">
+						<span class="sp1">销量:</span>
+						<span class="sp2" th:text="${book.getSales()}">230</span>
+					</div>
+					<div class="book_amount">
+						<span class="sp1">库存:</span>
+						<span class="sp2" th:text="${book.getStock()}">1000</span>
+					</div>
+					<div class="book_add">
+						<button th:bookid="${book.getId()}" class="addtocart">加入购物车</button>
+					</div>
+				</div>
+			</div>
+			
+
+		</div>
+		
+		<div th:replace="pages/common/pagenav::pagenav"></div>
+	
+	</div>
+
+<div th:replace="pages/common/bar::footbar"></div>
+
+</body>
+</html>

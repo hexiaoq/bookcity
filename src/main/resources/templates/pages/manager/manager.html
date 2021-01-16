@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>后台管理</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}" >
+
+<style type="text/css">
+	h1 {
+		text-align: center;
+		margin-top: 200px;
+	}
+</style>
+	<script type="text/javascript" th:src="@{/script/jquery-1.7.2.js}"></script>
+	<script type="text/javascript">
+		$(function () {
+$("#jump").click(function () {
+alert("该功能还在研发中,敬请期待");
+})
+		})
+	</script>
+
+</head>
+<body>
+	
+	<div id="header">
+			<img class="logo_img" alt="" th:href="@{/img/logo.gif}" >
+			<span class="wel_word">后台管理系统</span>
+			<div>
+				<a href="book_manager.html" th:href="@{/manager/page}">图书管理</a>
+				<a  id="jump">订单管理</a>
+				<a href="../client/index1.html" th:href="@{/index}">返回商城</a>
+			</div>
+	</div>
+	
+	<div id="main">
+		<h1>欢迎管理员进入后台管理系统</h1>
+	</div>
+	
+	<div th:replace="pages/common/bar::footbar"></div>
+</body>
+</html>

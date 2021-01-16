@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+
+<body th:fragment="topbar">
+<div id="header">
+    <img class="logo_img" alt="" th:src="@{/img/logo.gif}" >
+    <div>
+        <span>欢迎<span class="um_span" th:text="${username}"></span>光临HXQ书城</span>
+        <a id="jump">我的订单</a>
+        <script type="text/javascript" th:src="@{/script/jquery-1.7.2.js}"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#jump").click(function () {
+                    alert("该功能还在研发中,敬请期待");
+                })
+            })
+        </script>
+        <a th:href="@{/manager.html}">后台管理</a>
+        <a th:href="@{/index}">返回</a>
+    </div>
+</div>
+
+
+
+</body>
+
+
+<link type="text/css" rel="stylesheet"  th:href="@{/css/style.css}" th:fragment="cssbar">
+
+<div id="bottom" th:fragment="footbar">
+			<span>
+				HXQ书城.Copyright &copy;2020
+			</span>
+</div >
+
+
+</body>
+</html>
